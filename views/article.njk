@@ -1,0 +1,9 @@
+{% extends "layout.njk" %}
+
+{%block body %}
+
+{# <h1>{{article.title}}</h1> #}
+<p>{{article.content | safe }}</p>
+
+<a href="{{article.link}}"> Original Article </a>
+{% endblock %}
