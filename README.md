@@ -23,6 +23,7 @@
 
 ```bash
 git clone <repository-url>
+cd readit-later
 ```
 
 2. Install dependencies
