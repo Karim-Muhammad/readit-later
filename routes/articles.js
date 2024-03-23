@@ -1,6 +1,8 @@
 import express from "express";
-import puppeteer from "puppeteer";
+import puppeteer, { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from "puppeteer";
 import Article from "./../models/Article.js";
+import { getWithTags } from "../utils/index.js";
+// import Tag from "./../models/Tag.js";
 
 const router = express.Router();
 router.get("/", (req, res) => {
@@ -12,11 +14,14 @@ router.get("/articles/form", (req, res) => {
 });
 
 router.get("/articles", (req, res, next) => {
-  Article.all((err, data) => {
+  Article.all(async (err, data) => {
     if (err) console.log(err);
 
+    const articles = await getWithTags(data);
+    console.log("articles", articles);
+
     res.render("articles.njk", {
-      articles: data,
+      articles,
     });
   });
 });
@@ -35,8 +40,8 @@ router.get("/articles/:id", (req, res, next) => {
 
 router.post("/articles", async (req, res, next) => {
   const webURL = req.body.url;
-  const tags = req.body.tags;
-  return res.send("URL: " + webURL + " Tags: " + tags);
+  const tags = req.body.tags.split(",");
+
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
@@ -74,6 +79,7 @@ router.post("/articles", async (req, res, next) => {
 
     // replace all src to make them start with https hostname (as absolute path)
     const images = document.getElementsByTagName("img");
+
     Array.from(images).forEach((image) => {
       if (
         image &&
@@ -92,23 +98,44 @@ router.post("/articles", async (req, res, next) => {
 
     const meta = document.getElementsByTagName("meta");
     Array.from(meta).forEach((m) => {
-      m.remove();
+      if (
+        !m?.getAttribute("name") === "viewport" &&
+        !m?.getAttribute("name") === "description" &&
+        !m?.getAttribute("name") === "keywords"
+      ) {
+        m.remove();
+      }
     });
 
     // no reflect all my previous actions on this outerHtml
     return document.documentElement.outerHTML;
   });
+
   // Title of web page
   const title = await page.title();
 
   // Link of the web page
   const link = webURL;
 
+  // image of the web page
+  const imageForArticle = await page.evaluate(() => {
+    const images = document.getElementsByTagName("img");
+    return images[1]?.src;
+  });
+
+  // description of the web page
+  const description = await page.evaluate(() => {
+    return document.querySelector("meta[name='description']")?.content;
+  });
+
   Article.create(
     {
-      title: title,
+      image: imageForArticle,
       content: extractedHtml,
-      link: link,
+      title,
+      description,
+      link,
+      tags,
     },
     (error, result) => {
       if (error) return next(error);

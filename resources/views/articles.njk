@@ -1,20 +1,47 @@
 {% extends "layout.njk" %}
 
-{# {% block styles %}
-<style>
-    {% for style in styles %}
-        <link rel="stylesheet" href={{style}} />
-    {% endfor %}
-</style>
-{% endblock %} #}
-
 {% block body %}
-    <h1>Show all articles</h1>
-    <ul>
-        {% for article in articles %}
-            <li>
-                <h4><a href="/articles/{{article.id}}">{{article.title}}</a></h4>
-            </li>            
-        {% endfor %}
-    </ul>
+    <h1 class="text-white font-extrabold text-3xl my-5 ml-5">Show all articles</h1>
+        
+    <!-- ====== Blog Section Start -->
+    <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-2 dark:bg-dark">
+        <div class="container mx-auto">
+            <div class="flex flex-wrap -mx-4">
+                {% for article in articles %}
+                    <div class="w-full px-4 md:w-1/2">
+                        <div class="flex gap-2 w-full mb-10">
+                            <div class="w-full h-full mb-2 overflow-hidden rounded">
+                                <img
+                                    src="{{ article.image }}"
+                                    alt="image"
+                                    class="w-full h-full object-cover"
+                                    />
+                            </div>
+                            <div>
+                                <span
+                                    class="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center dark:text-white rounded bg-primary"
+                                    >
+                                    {% for tag in article.tags %}
+                                        <span class="bg-slate-300 rounded-md w-7 px-2 py-1">{{ tag }}</span>
+                                    {% endfor %}
+                                </span>
+                                <h3>
+                                    <a
+                                        href="/articles/{{ article.id }}"
+                                        class="inline-block mb-4 text-xl font-semibold text-dark dark:text-white hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
+                                        >
+                                        {{ article.title }}
+                                    </a>
+                                </h3>
+                                <p class="text-base text-black dark:text-white">
+                                    {{ article.description }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- ====== Blog Section End -->
 {% endblock %}

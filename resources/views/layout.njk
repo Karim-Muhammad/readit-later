@@ -1,21 +1,28 @@
 <!DOCTYPE html>
-<html lang="en" theme="dark" class="dark h-full">
+<html lang="en" theme="" class="">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <meta name="author" content="Karim Muhammad" />
+    <meta name="title" content="Saver Articles" />
+    <meta name="keywords" content="saver, articles, read, later, bookmarks" />
+    <meta name="description" content="A simple saver articles, to read it later" />
+    
+    <title>Readit</title>
+    <link rel="icon" href="/images/favicon.ico" />
 
+    {# ==================== CSS ========================== #}
     <link rel="stylesheet" type="text/css" href='/style/index.css' />
     {% block styles %} {% endblock %}
-
   </head>
-  <body class="h-[calc(100vh)] bg-slate-900">
+  <body class="h-[calc(100vh)]">
     {% include "partials/header.njk" %}
 
     {% block body %} {% endblock %}
     
     {% include "partials/footer.njk" %}
 
+    {# ======================== JS ======================= #}
     {% block scripts %} {% endblock %}
     <script src="/js/flowbite.js"></script>
   </body>
