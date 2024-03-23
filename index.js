@@ -1,7 +1,5 @@
 import express from "express";
 import nunjucks from "nunjucks";
-// import axios from "axios";
-// import { load } from "cheerio";
 import articlesRouter from "./routes/articles.js";
 
 const app = express();

@@ -3,20 +3,11 @@ import db from "../database/setup.js";
 export default class Article {
   static all(cb) {
     db.all("SELECT * FROM articles", cb);
-    // Callback = (err, result) => {}
   }
 
   static find(id, cb) {
     const stmt = db.prepare("SELECT * FROM articles WHERE id = ?");
     stmt.get([+id], cb);
-
-    // db.run(
-    //   "SELECT * FROM articles WHERE id = $id",
-    //   {
-    //     $id: +id,
-    //   },
-    //   cb
-    // );
   }
 
   static create(data, cb) {

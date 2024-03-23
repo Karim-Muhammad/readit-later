@@ -48,14 +48,6 @@ router.post("/articles", async (req, res, next) => {
   });
 
   const extractedHtml = await page.evaluate(() => {
-    const page = document.documentElement.outerHTML;
-    const host = new URL(document.baseURI).origin;
-    // Replace all relative links with absolute links
-    // page = page.replace(/href="\//g, `href="${host}/`);
-
-    // Replace all relative src with absolute src
-    // page = page.replace(/src="\//g, `src="${host}/`);
-
     // replace all href to make them start with https hostname (as absolute path)
     const aTags = document.getElementsByTagName("a");
     const links = document.getElementsByTagName("link");
@@ -94,13 +86,6 @@ router.post("/articles", async (req, res, next) => {
       console.log(image.getAttribute("src"));
     });
 
-    // Remove all script, meta tags
-    // page = page.replace(
-    //   /<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi,
-    //   ""
-    // );
-    // page = page.replace(/<meta\b[^<]*(?:(?!<\/meta>)<[^<]*)*<\/meta>/gi, "");
-
     const scripts = document.getElementsByTagName("script");
     Array.from(scripts).forEach((script) => {
       script.remove();
@@ -110,14 +95,6 @@ router.post("/articles", async (req, res, next) => {
     Array.from(meta).forEach((m) => {
       m.remove();
     });
-
-    // const meta = document.querySelectorAll("meta");
-    // scripts.forEach((script) => {
-    //   script.remove();
-    // });
-    // meta.forEach((m) => {
-    //   m.remove();
-    // });
 
     // no reflect all my previous actions on this outerHtml
     return document.documentElement.outerHTML;
