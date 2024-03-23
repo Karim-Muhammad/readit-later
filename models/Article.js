@@ -1,4 +1,4 @@
-import db from "./../database/setup.js";
+import db from "../database/setup.js";
 
 export default class Article {
   static all(cb) {
