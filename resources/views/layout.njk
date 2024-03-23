@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" theme="dark" class="dark h-full">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link rel="stylesheet" type="text/css" href='/style/index.css' />
+    {% block styles %} {% endblock %}
+
+  </head>
+  <body class="h-[calc(100vh)] bg-slate-900">
+    {% include "partials/header.njk" %}
+
+    {% block body %} {% endblock %}
+    
+    {% include "partials/footer.njk" %}
+
+    {% block scripts %} {% endblock %}
+    <script src="/js/flowbite.js"></script>
+  </body>
+</html>

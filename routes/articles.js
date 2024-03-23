@@ -35,13 +35,12 @@ router.get("/articles/:id", (req, res, next) => {
 
 router.post("/articles", async (req, res, next) => {
   const webURL = req.body.url;
-
+  const tags = req.body.tags;
+  return res.send("URL: " + webURL + " Tags: " + tags);
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   await page.goto(webURL);
-  // Set screen size
-  await page.setViewport({ width: 1080, height: 1024 });
 
   page.on("console", (msg) => {
     console.log("Page console log:", msg.text());
@@ -54,8 +53,8 @@ router.post("/articles", async (req, res, next) => {
     Array.from(aTags).forEach((a) => {
       if (
         a &&
-        !a.getAttribute("href").startsWith("http") &&
-        !a.getAttribute("href").startsWith("#")
+        !a.getAttribute("href")?.startsWith("http") &&
+        !a.getAttribute("href")?.startsWith("#")
       ) {
         a.setAttribute("href", new URL(a.href, document.baseURI).href);
       }
@@ -65,8 +64,8 @@ router.post("/articles", async (req, res, next) => {
     Array.from(links).forEach((link) => {
       if (
         link &&
-        !link.getAttribute("href").startsWith("http") &&
-        !link.getAttribute("href").startsWith("#")
+        !link.getAttribute("href")?.startsWith("http") &&
+        !link.getAttribute("href")?.startsWith("#")
       ) {
         link.setAttribute("href", new URL(link.href, document.baseURI).href);
       }
@@ -78,8 +77,8 @@ router.post("/articles", async (req, res, next) => {
     Array.from(images).forEach((image) => {
       if (
         image &&
-        !image.getAttribute("src").startsWith("http") &&
-        !image.getAttribute("src").startsWith("#")
+        !image.getAttribute("src")?.startsWith("http") &&
+        !image.getAttribute("src")?.startsWith("#")
       ) {
         image.setAttribute("src", new URL(image.src, document.baseURI).href);
       }

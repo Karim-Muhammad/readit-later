@@ -3,9 +3,9 @@ import nunjucks from "nunjucks";
 import articlesRouter from "./routes/articles.js";
 
 const app = express();
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3001);
 
-nunjucks.configure(`${process.cwd()}/views`, {
+nunjucks.configure(`${process.cwd()}/resources/views`, {
   autoescape: true,
   noCache: true,
   express: app,
@@ -20,6 +20,9 @@ app.use(
     extended: true,
   })
 );
+
+// Static
+app.use(express.static(`public`));
 
 process.on("uncaughtException", (er) => {
   console.log("Uncaught Exception ", er);
