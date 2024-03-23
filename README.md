@@ -10,6 +10,7 @@
 
 - Tags for classify saved articles, web pages.
 - Search saved articles, web pages.
+- Fixing some Paths and URL issues. (using Absolute paths)
 
 ## Technologies
 
