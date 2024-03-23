@@ -20,6 +20,7 @@
 - Node.js/Express.js
 - SQLite
 - Nunjucks (Template Engine)
+- Tailwindcss + flowbite (CSS Framework)
 
 ## Installation
 
@@ -39,7 +40,8 @@ npm install
 3. Run the app
 
 ```bash
-node index.js
+npx tailwindcss -i ./public/style/input.css -o ./public/style/index.css --watch # for compiling tailwindcss
+node index.js # for running the app
 ```
 
 4. Open your browser and navigate to `http://localhost:3000`
