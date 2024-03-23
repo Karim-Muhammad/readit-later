@@ -11,6 +11,9 @@
 - Tags for classify saved articles, web pages.
 - Search saved articles, web pages.
 - Fixing some Paths and URL issues. (using Absolute paths)
+- Recursively save articles, web pages. (Save all links in the page)
+- Download resources (images, videos, etc.) in the local.
+- Export saved articles, web pages as PDF, HTML, etc.
 
 ## Technologies
 
