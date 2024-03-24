@@ -1,3 +1,6 @@
+**_Archived_**: This project is archived and no longer maintained.
+use **Puppeteer** branch for the latest version.
+
 **Readit-Later** a simple web site aims to save your favourties articles, web pages to read them later.
 
 ## Features
