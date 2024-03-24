@@ -6,23 +6,27 @@
     <!-- ====== Blog Section Start -->
     <section class="pt-20 pb-10 lg:pt-[120px] lg:pb-2 dark:bg-dark">
         <div class="container mx-auto">
-            <div class="flex flex-wrap -mx-4">
+            <div class="flex justify-between flex-wrap gap-2 mx-4">
                 {% for article in articles %}
-                    <div class="w-full px-4 md:w-1/2">
-                        <div class="flex gap-2 w-full mb-10">
+                    <div class="w-full px-4 md:w-[calc(95%/2)] shadow">
+                        <div class="flex mb-10">
                             <div class="w-full h-full mb-2 overflow-hidden rounded">
                                 <img
                                     src="{{ article.image }}"
                                     alt="image"
-                                    class="w-full h-full object-cover"
+                                    class="w-[150px] h-[150px] object-cover"
                                     />
                             </div>
-                            <div>
+                            <div class="p-5">
                                 <span
                                     class="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center dark:text-white rounded bg-primary"
                                     >
                                     {% for tag in article.tags %}
-                                        <span class="bg-slate-300 rounded-md w-7 px-2 py-1">{{ tag }}</span>
+                                        <span class="bg-slate-300 rounded-md w-7 px-2 py-1">
+                                            <a href="/articles/search?q={{ tag }}" class="inline-block text-black">
+                                                {{ tag }}
+                                            </a>
+                                        </span>
                                     {% endfor %}
                                 </span>
                                 <h3>

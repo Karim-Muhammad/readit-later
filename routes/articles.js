@@ -18,7 +18,19 @@ router.get("/articles", (req, res, next) => {
     if (err) console.log(err);
 
     const articles = await getWithTags(data);
-    console.log("articles", articles);
+
+    res.render("articles.njk", {
+      articles,
+    });
+  });
+});
+
+router.get("/articles/search", (req, res, next) => {
+  const query = req.query.q;
+  Article.search(query, async (error, result) => {
+    if (error) return next(error);
+
+    const articles = await getWithTags(result);
 
     res.render("articles.njk", {
       articles,
@@ -130,10 +142,10 @@ router.post("/articles", async (req, res, next) => {
 
   Article.create(
     {
-      image: imageForArticle,
+      image: imageForArticle || "/images/Ninja.svg",
       content: extractedHtml,
       title,
-      description,
+      description: description || "No description",
       link,
       tags,
     },

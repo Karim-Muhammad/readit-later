@@ -11,6 +11,28 @@ export default class Article {
     stmt.get([+id], cb);
   }
 
+  static search(query, cb) {
+    db.all(
+      "SELECT * FROM articles WHERE title LIKE ? OR description LIKE ?",
+      [`%${query}%`, `%${query}%`],
+      function (err, rows) {
+        console.log(rows);
+
+        if (err) return cb(err, null);
+        if (!rows.length) {
+          // Search by tags
+          return db.all(
+            "SELECT * FROM articles WHERE id IN (SELECT article_id FROM tags WHERE name LIKE ?)",
+            [`%${query}%`],
+            cb
+          );
+        }
+
+        cb(null, rows);
+      }
+    );
+  }
+
   static create(data, cb) {
     db.run(
       "INSERT INTO articles (image, title, description, content, link) VALUES (?, ?, ?, ?, ?)",
