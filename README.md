@@ -9,7 +9,7 @@
 ### Incoming Features
 
 - [x] Tags for classify saved articles, web pages.
-- [] Search saved articles, web pages.
+- [x] Search saved articles, web pages.
 - [] Fixing some Paths and URL issues. (using Absolute paths)
 - [] Recursively save articles, web pages. (Save all links in the page)
 - [] Download resources (images, videos, etc.) in the local.
@@ -46,3 +46,11 @@ node index.js # for running the app
 
 4. Open your browser and navigate to `http://localhost:3000`
 5. Enjoy!
+
+### Preview
+
+- About
+  ![About page](About.png)
+
+- Articles
+  ![Articles page](Articles.png)
