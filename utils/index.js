@@ -1,17 +1,6 @@
-import Tag from "./../models/Tag.js";
+import path from "path";
+import { fileURLToPath } from "url";
 
-export async function getWithTags(articles) {
-  try {
-    const tagPromises = articles.map(async (article) => {
-      const tags = await Tag.find(article.id);
-      article.tags = tags.map((tag) => tag.name);
-    });
-
-    await Promise.all(tagPromises);
-
-    return articles;
-  } catch (err) {
-    console.log(err);
-    throw err;
-  }
-}
+export const __filename = fileURLToPath(import.meta.url);
+export const __dirname = path.dirname(__filename);
+export const __root = path.resolve(__dirname, "../");

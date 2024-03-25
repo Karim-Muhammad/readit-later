@@ -1,8 +1,9 @@
 import express from "express";
-import puppeteer, { DEFAULT_INTERCEPT_RESOLUTION_PRIORITY } from "puppeteer";
+import puppeteer from "puppeteer";
 import Article from "./../models/Article.js";
-import { getWithTags } from "../utils/index.js";
-// import Tag from "./../models/Tag.js";
+
+import Tag from "../models/Tag.js";
+const getWithTags = Tag.getWithTags;
 
 const router = express.Router();
 router.get("/", (req, res) => {

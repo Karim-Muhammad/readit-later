@@ -2,12 +2,14 @@
 
 import express from "express";
 import nunjucks from "nunjucks";
+
+import { __root } from "./utils/index.js";
 import articlesRouter from "./routes/articles.js";
 
 const app = express();
 app.set("port", process.env.PORT || 3001);
 
-nunjucks.configure(`${process.cwd()}/resources/views`, {
+nunjucks.configure(`${__root}/resources/views`, {
   autoescape: true,
   noCache: true,
   express: app,
@@ -24,7 +26,7 @@ app.use(
 );
 
 // Static
-app.use(express.static(`public`));
+app.use(express.static(`${__root}/public`));
 
 process.on("uncaughtException", (er) => {
   console.log("Uncaught Exception ", er);

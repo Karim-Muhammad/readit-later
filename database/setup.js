@@ -1,7 +1,9 @@
 import Sqlite3 from "sqlite3";
+import { __root } from "../utils/index.js";
 
 const sqlite3 = Sqlite3.verbose();
-const db = new sqlite3.Database("./database.db");
+const db = new sqlite3.Database(`${__root}/database.db`); // write your database
+// you can do database for each type of your articles.
 
 db.serialize(() => {
   db.run(
