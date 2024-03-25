@@ -44,8 +44,35 @@ npx tailwindcss -i ./public/style/input.css -o ./public/style/index.css --watch 
 node index.js # for running the app
 ```
 
-4. Open your browser and navigate to `http://localhost:3000`
-5. Enjoy!
+of if you want to run it in any place in your system by type only "readit" in the terminal to the following:
+
+Linux/MacOS:
+
+```bash
+sudo ln -s /path/to/index.js /usr/local/bin/readit
+```
+
+after that you can do this:
+
+```bash
+readit
+```
+
+Windows:
+
+1. Go to the directory where the **readit.bat** file is located.
+2. Change the path in the **readit.bat** file to the path of the **index.js** file.
+3. Add the **readit.bat** file to anywhere in your system.
+4. then add the directory which contains the **readit.bat** file to the system path.
+
+then you can run the app by typing "readit" in the terminal.
+
+```bash
+readit
+```
+
+5. Open your browser and navigate to `http://localhost:3001`
+6. Enjoy!
 
 ### Preview
 

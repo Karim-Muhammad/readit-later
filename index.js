@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import express from "express";
 import nunjucks from "nunjucks";
 import articlesRouter from "./routes/articles.js";
