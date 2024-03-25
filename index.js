@@ -33,5 +33,9 @@ process.on("uncaughtException", (er) => {
 app.use("/", articlesRouter);
 
 app.listen(app.get("port"), () => {
-  console.log(`The Server is Listening on ${app.get("port")}`);
+  console.log(
+    `The Server is Listening on ${app.get(
+      "port"
+    )}, visit: http://localhost:${app.get("port")}`
+  );
 });
